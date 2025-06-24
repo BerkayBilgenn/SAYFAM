@@ -14,10 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. AOS Kütüphanesini Başlatma (Animate On Scroll)
     AOS.init({
-        duration: 1000, // Animasyon süresi (daha uzun)
-        easing: 'ease-in-out-cubic', // Daha akıcı bir eğri
-        once: true, // Animasyonun sadece bir kez tetiklenmesini sağlar
-        mirror: false // Sayfa yukarı veya aşağı kaydırıldığında animasyonun tekrarlanıp tekrarlanmayacağı
+        duration: 1000,
+        easing: 'ease-in-out-cubic',
+        once: true,
+        mirror: false
     });
 
     // 2. Typed.js ile Dinamik Metin Yazma Efekti
@@ -26,16 +26,16 @@ document.addEventListener('DOMContentLoaded', () => {
         new Typed(typedTextElement, {
             strings: [
                 'Kaan Berkay Bilgen',
+                'Yazılım Geliştirme ',
+                'Dijital Pazarlama ',
+                'Meraklısıyım',
                 
-                'Yazılım Geliştirme Meraklısıyım',
-                'Dijital Pazarlama Meraklısıyım',
-                'Analitik Düşünmeyi Severim'
             ],
             typeSpeed: 70,
             backSpeed: 30,
             loop: true,
             showCursor: true,
-            cursorChar: '_',
+            cursorChar: '',
         });
     }
 
@@ -45,6 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
 
             const targetId = this.getAttribute('href');
+            if (targetId === '#') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+
             const targetSection = document.querySelector(targetId);
 
             if (targetSection) {
@@ -74,28 +79,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hamburger && navLinks) {
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active'); // Hamburger ikonunu da değiştirebiliriz (CSS ile)
+            hamburger.classList.toggle('active');
         });
     }
 
-    // 5. Vanta.js ile Dinamik Arka Plan Animasyonu (Tüm Sayfaya)
-    const vantaBackgroundElement = document.getElementById('vanta-background');
-    if (vantaBackgroundElement) {
-        VANTA.NET({
-            el: vantaBackgroundElement, 
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x00e5ff, // primary-color (Elektrik Mavisi)
-            backgroundColor: 0x121212, // bg-color (Neredeyse Siyah)
-            points: 15.00, // Nokta sayısı
-            maxDistance: 20.00, // Noktalar arası maksimum çizgi mesafesi
-            spacing: 20.00, // Noktalar arası boşluk
-            showLines: true // Çizgileri göster
-        });
+    // 5. Vanta.js - SADECE GENİŞ EKRANLARDA ÇALIŞTIRMA
+    if (window.innerWidth > 768) {
+        const vantaBackgroundElement = document.getElementById('vanta-background');
+        if (vantaBackgroundElement) {
+            VANTA.NET({
+                el: vantaBackgroundElement,
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0x00e5ff,
+                backgroundColor: 0x121212,
+                points: 12.00, // Performans için biraz azaltıldı
+                maxDistance: 20.00,
+                spacing: 20.00,
+                showLines: true
+            });
+        }
     }
 });
