@@ -106,3 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+
+// MOBİL İÇİN OLAN KISMI DÜZELT
